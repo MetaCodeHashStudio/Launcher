@@ -111,6 +111,8 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String sysName = System.getProperty("os.name");
+        System.out.println(sysName);
         if(saveLogon)
         {
             AppFileHandler.saveState = "true";

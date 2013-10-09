@@ -26,6 +26,8 @@ public class AppFileHandler {
             // Save logon info in a file.
         //First create the folders to use
         String Name = System.getProperty("user.name"); 
+        String sysName = System.getProperty("os.name");
+        
         success = (new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid")).mkdirs();
         if (!success) {
             System.out.println("Shit! couldnt create folders!");
