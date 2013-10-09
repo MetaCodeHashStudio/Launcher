@@ -11,6 +11,7 @@ public class Start {
 
     public static com.rushteamc.yahtzee.GUI.LoginCreateWin frame;
     public static com.rushteamc.yahtzee.GUI.CreateAccWin frame2;
+    public static com.rushteamc.yahtzee.GUI.MainMenu frame3;
     
     public static void main(String[] args)  {
         
@@ -62,7 +63,29 @@ public class Start {
 		
 	}
      
-    
+        public static void goToLogon() // Called by the event handler of PlayerNumbers. Starts PlayerNames check.
+	{
+		EventQueue.invokeLater
+		(
+			new Runnable() 
+			{
+				public void run()
+				{
+					try
+					{
+						frame3 = new com.rushteamc.yahtzee.GUI.MainMenu();
+                                                frame3.setLocation(600, 400);
+                                                frame3.setVisible(true);
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+			}
+		);
+		
+	}    
     
     
     

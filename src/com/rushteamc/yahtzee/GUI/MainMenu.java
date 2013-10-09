@@ -4,6 +4,16 @@
  */
 package com.rushteamc.yahtzee.GUI;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  *
  * @author Runnetty
@@ -13,6 +23,10 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    
+    private static String Username = "Nickname";
+    private static String Password = "Password";
+    private PrintStream out = null;
     public MainMenu() {
         initComponents();
     }
@@ -38,6 +52,11 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField1.setText("Runnetty");
 
         jCheckBox1.setText("Remember me");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,8 +116,25 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Check if
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // Save logon info in a file.
+        
+        try {
+            File newTextFile = new File("C:\\Users\\Runnetty\\AppData\\Roaming\\.yahtzoid\\logon.yah");
+            FileWriter fw = new FileWriter(newTextFile);
+            fw.write(Username+":"+Password);
+            fw.close();   
+        }
+        catch (IOException iox) { 
+            iox.printStackTrace();
+        } 
+           finally {
+            if (out != null) out.close();
+               }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
