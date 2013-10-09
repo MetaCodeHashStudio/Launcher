@@ -19,6 +19,7 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    private boolean saveLogon = false;
     public MainMenu() {
 
         initComponents();
@@ -110,12 +111,30 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AppFileHandler.Username = nickBox1.getText();
-        
+        if(saveLogon)
+        {
+            AppFileHandler.saveState = "true";
+            AppFileHandler.Username = nickBox1.getText();
+            char[] pass = passBox1.getPassword();
+            String passString = new String(pass);
+            AppFileHandler.Password = passString;
+            AppFileHandler.SaveLogon();
+        }else
+        {
+            AppFileHandler.saveState = "false";
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        AppFileHandler.SaveLogon();
+        if(!saveLogon)
+        {
+            saveLogon = true;
+            System.out.println("Saving Logon");
+        }else
+        {
+            saveLogon = false;
+            System.out.println("Not Saving Logon");
+        }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**

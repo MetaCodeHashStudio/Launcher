@@ -17,7 +17,8 @@ import java.io.PrintStream;
 public class AppFileHandler {
     
     public static String Username;
-    public static String Password = "Password";
+    public static String Password;
+    public static String saveState;
     private static PrintStream out = null;
     private static boolean success;
     
@@ -27,13 +28,13 @@ public class AppFileHandler {
         String Name = System.getProperty("user.name"); 
         success = (new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid")).mkdirs();
         if (!success) {
-            // Directory creation failed
+            System.out.println("Shit! couldnt create folders!");
         }
         
         try {
             File newTextFile = new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid\\logon.yah");
             FileWriter fw = new FileWriter(newTextFile);
-            fw.write(Username+":"+Password);
+            fw.write(saveState + ":" + Username + ":" + Password);
             fw.close();   
         }
         catch (IOException iox) { 
