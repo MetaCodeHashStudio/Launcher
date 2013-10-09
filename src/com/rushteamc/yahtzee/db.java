@@ -26,7 +26,7 @@ public class db {
 
        private static String url = "jdbc:mysql://localhost:3306/yahtzoid_acc";
        private static  String user = "root";
-       private static  String password = "Root";
+       private static  String password = "root";
        
     public static String addAccName;
     public static String addPassword;
