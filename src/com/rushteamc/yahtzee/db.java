@@ -1,0 +1,119 @@
+
+package com.rushteamc.yahtzee;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.Version;
+/*
+ * @author Runnetty
+ */
+
+public class db {
+    
+        private static Connection con = null;
+       private static Statement st = null;
+        private static ResultSet rs = null;
+        private static PreparedStatement pst = null;
+        private static PreparedStatement pst2 = null;
+        private static PreparedStatement pst3 = null;
+        
+
+       private static String url = "jdbc:mysql://localhost:3306/yahtzoid_acc";
+       private static  String user = "root";
+       private static  String password = "root";
+       
+    public static String addAccName;
+    public static String addPassword;
+    public static String addEmail;
+    public static String addGender;
+    public static String addDate;
+    
+    public static String addLvl = "1";
+    public static String addGold = "10";
+    public static String addXP = "0";
+    
+    public static void startConnection(){
+        
+        try {
+            con = DriverManager.getConnection(url, user, password);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT VERSION()");
+         
+            if (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        } 
+        
+    }
+    
+
+    
+    public static void addAccToDB(){
+        
+        try {
+            
+            con = DriverManager.getConnection(url, user, password);
+
+            pst = con.prepareStatement("INSERT INTO metaacc (aNickname, aPassword)\n" +
+"VALUE('" + addAccName + "', '" + addPassword + "');");
+            
+            pst2 = con.prepareStatement("INSERT INTO metaAcc_Details (aEmail, aGender,aDate)\n" +
+"VALUE('" + addEmail + "', '" + addGender + "', '" + addDate + "');");
+            
+            pst3 = con.prepareStatement("INSERT INTO yahtzoid (aLvl, aGold,aXP)\n" +
+"VALUE("+ addLvl + "," + addGold + "," + addXP + ");");
+           
+            pst.executeUpdate();
+            pst2.executeUpdate();
+            pst3.executeUpdate();
+            
+            String addAccName= null;
+            String addPassword= null;
+            String addEmail= null;
+            String addGender = null;
+            String addDate = null;
+            
+            if (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        }
+        
+        
+        
+        
+    }
+      public static void EndConnection(){
+          try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                Logger lgr = Logger.getLogger(Version.class.getName());
+                lgr.log(Level.WARNING, ex.getMessage(), ex);
+            }
+    
+      }
+}
