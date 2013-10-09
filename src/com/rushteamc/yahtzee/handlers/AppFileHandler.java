@@ -4,6 +4,7 @@
  */
 package com.rushteamc.yahtzee.handlers;
 
+import com.rushteamc.yahtzee.GUI.MainMenu;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,8 +16,8 @@ import java.io.PrintStream;
  */
 public class AppFileHandler {
     
-    private static String Username = "Nickname";
-    private static String Password = "Password";
+    public static String Username;
+    public static String Password = "Password";
     private static PrintStream out = null;
     private static boolean success;
     
