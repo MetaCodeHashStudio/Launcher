@@ -67,7 +67,7 @@ public class db {
             con = DriverManager.getConnection(url, user, password);
 
             pst = con.prepareStatement("INSERT INTO metaacc (aNickname, aPassword, aEmail, aGender,aDate)\n"
-                    + "value('" + addAccName + "', ENCRYPT('" + addPassword + "','"+ salt1+salt2 +"'),'" + addEmail + "', '" + addGender + "', '" + addDate + "');");
+                    + "value('" + addAccName + "', AES_ENCRYPT('" + addPassword + "','"+ salt1+salt2 +"'),'" + addEmail + "', '" + addGender + "', '" + addDate + "');");
             
             pst2 = con.prepareStatement("INSERT INTO yahtzoid (aLvl, aGold,aXP)\n" +
 "VALUE("+ addLvl + "," + addGold + "," + addXP + ");");
