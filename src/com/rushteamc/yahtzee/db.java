@@ -26,14 +26,15 @@ public class db {
 
        private static String url = "jdbc:mysql://localhost:3306/yahtzoid_acc";
        private static  String user = "root";
-       private static  String password = "root";
+       private static  String password = "Root";
        
     public static String addAccName;
     public static String addPassword;
     public static String addEmail;
     public static String addGender;
     public static String addDate;
-    
+    public static String salt1 = "aqwserdftghyuikolpø";
+    public static String salt2 = "1234567890";
     public static String addLvl = "1";
     public static String addGold = "10";
     public static String addXP = "0";
@@ -65,18 +66,15 @@ public class db {
             
             con = DriverManager.getConnection(url, user, password);
 
-            pst = con.prepareStatement("INSERT INTO metaacc (aNickname, aPassword)\n" +
-"VALUE('" + addAccName + "', '" + addPassword + "');");
+            pst = con.prepareStatement("INSERT INTO metaacc (aNickname, aPassword, aEmail, aGender,aDate)\n"
+                    + "value('" + addAccName + "', ENCRYPT('" + addPassword + "','"+ salt1+salt2 +"'),'" + addEmail + "', '" + addGender + "', '" + addDate + "');");
             
-            pst2 = con.prepareStatement("INSERT INTO metaAcc_Details (aEmail, aGender,aDate)\n" +
-"VALUE('" + addEmail + "', '" + addGender + "', '" + addDate + "');");
-            
-            pst3 = con.prepareStatement("INSERT INTO yahtzoid (aLvl, aGold,aXP)\n" +
+            pst2 = con.prepareStatement("INSERT INTO yahtzoid (aLvl, aGold,aXP)\n" +
 "VALUE("+ addLvl + "," + addGold + "," + addXP + ");");
            
             pst.executeUpdate();
             pst2.executeUpdate();
-            pst3.executeUpdate();
+
             
             String addAccName= null;
             String addPassword= null;
