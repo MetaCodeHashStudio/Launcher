@@ -12,7 +12,7 @@ CREATE TABLE metaAcc
 (
 accID int(1) not null unique AUTO_INCREMENT,
 aNickname char(15) not null unique,
-aPassword varchar(255) not null,
+aPassword blob(255) not null,
 aEmail char(50) not null unique,
 aGender char(6) not null,
 aDate char(12)not null,
@@ -30,7 +30,7 @@ Foreign key (ID) REFERENCES metaAcc (accID)
 );
 
 INSERT INTO metaacc (aNickname, aPassword, aEmail, aGender,aDate)
-value('Runnetty2', DES_ENCRYPT('good','kk'),'mats19922@gmail.com', 'male', '10.12.92');
+value('Runnetty2', ENCRYPT('good','kk'),'mats19922@gmail.com', 'male', '10.12.92');
 
 INSERT INTO metaAcc_Details (aEmail, aGender,aDate)
 VALUE('mats1992@gmail.com', 'male', '10.12.92');
