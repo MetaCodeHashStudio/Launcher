@@ -5,9 +5,7 @@
 package com.rushteamc.yahtzee.GUI;
 
 import com.rushteamc.yahtzee.handlers.AppFileHandler;
-
-
-
+import com.rushteamc.yahtzee.handlers.FileDownloader;
 
 
 /**
@@ -20,9 +18,12 @@ public class MainMenu extends javax.swing.JFrame {
      * Creates new form MainMenu
      */
     private boolean saveLogon = false;
-    public MainMenu() {
-
+    private boolean UptoDate = false;
+    private String updText = "Checking for update...";
+    public MainMenu() 
+    {
         initComponents();
+        CheckUpdate();
     }
 
     /**
@@ -45,6 +46,11 @@ public class MainMenu extends javax.swing.JFrame {
         setResizable(false);
 
         nickBox1.setText("Runnetty");
+        nickBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nickBox1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Remember me");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +66,8 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Update Available");
+        jLabel1.setForeground(new java.awt.Color(0, 255, 0));
+        jLabel1.setText(updText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,14 +83,11 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCheckBox1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 10, Short.MAX_VALUE))
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nickBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -94,16 +98,15 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(nickBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(passBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1)
-                                .addComponent(jCheckBox1))
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(passBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jCheckBox1))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -111,8 +114,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sysName = System.getProperty("os.name");
-        System.out.println(sysName);
+
         if(saveLogon)
         {
             AppFileHandler.saveState = "true";
@@ -138,6 +140,10 @@ public class MainMenu extends javax.swing.JFrame {
             System.out.println("Not Saving Logon");
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void nickBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nickBox1ActionPerformed
+  
+    }//GEN-LAST:event_nickBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,4 +187,21 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField nickBox1;
     private javax.swing.JPasswordField passBox1;
     // End of variables declaration//GEN-END:variables
+    private void CheckUpdate()
+    {
+        /*
+         * Check if Version file on disk matches server version.
+         */
+        
+        UptoDate = true;
+        if(UptoDate)
+        {
+            jLabel1.setText("Up To date");
+            
+            
+        }else
+        {
+            jLabel1.setText("Update Available");
+        }
+    }
 }

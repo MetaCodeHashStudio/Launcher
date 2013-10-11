@@ -25,17 +25,11 @@ public class AppFileHandler {
     public static void SaveLogon(){
             // Save logon info in a file.
         //First create the folders to use
-        String Name = System.getProperty("user.name"); 
-        String sysName = System.getProperty("os.name");
-        
-        success = (new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid")).mkdirs();
-        if (!success) {
-            System.out.println("Shit! couldnt create folders!");
-        }
-        
+        FileDownloader.gen_Folders("\\config");
+        String Name = System.getProperty("user.name");
         try {
-            File newTextFile = new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid\\logon.yah");
-            FileWriter fw = new FileWriter(newTextFile);
+            File logonCFG = new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid\\config\\logon.cfg");
+            FileWriter fw = new FileWriter(logonCFG);
             fw.write(saveState + ":" + Username + ":" + Password);
             fw.close();   
         }

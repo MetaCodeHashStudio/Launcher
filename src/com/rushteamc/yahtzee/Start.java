@@ -14,7 +14,10 @@ public class Start {
     public static com.rushteamc.yahtzee.GUI.MainMenu frame3;
     
     public static void main(String[] args)  {
-        
+        String sysOs = System.getProperty("os.name");
+        String sysArch = System.getProperty("os.arch");
+        String sysName = System.getProperty("user.name");
+        System.out.println(sysName +" is using Os: "+sysOs + "\nWith a" + sysArch + " Architecture");
         db.startConnection();
         //db.addAccToDB();
         EventQueue.invokeLater
