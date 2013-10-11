@@ -5,7 +5,6 @@
 package com.rushteamc.yahtzee.handlers;
 
 import java.io.*;
-import java.net.*;
 
 /**
  * http://speedy.sh/kbvj3/ConquestDark-V1.0.zip
@@ -20,7 +19,7 @@ public class FileDownloader
     {
        gen_Folders("\\saves"); // generate Saves Folder
        gen_Folders("\\bin"); //Puts .jar here
-       gen_Folders("\\config");
+       gen_Folders("\\config"); 
     }
     
     public static void gen_Folders(String f_lockation)
