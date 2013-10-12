@@ -26,6 +26,7 @@ public class AppFileHandler {
             // Save logon info in a file.
         //First create the folders to use
         FileDownloader.gen_Folders("\\config");
+        
         String Name = System.getProperty("user.name");
         try {
             File logonCFG = new File("C:\\Users\\" + Name + "\\AppData\\Roaming\\.yahtzoid\\config\\logon.cfg");

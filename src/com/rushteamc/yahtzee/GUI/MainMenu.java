@@ -6,6 +6,10 @@ package com.rushteamc.yahtzee.GUI;
 
 import com.rushteamc.yahtzee.handlers.AppFileHandler;
 import com.rushteamc.yahtzee.handlers.FileDownloader;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -20,10 +24,11 @@ public class MainMenu extends javax.swing.JFrame {
     private boolean saveLogon = false;
     private boolean UptoDate = false;
     private String updText = "Checking for update...";
-    public MainMenu() 
+    public MainMenu() throws MalformedURLException, IOException 
     {
         initComponents();
         CheckUpdate();
+        
     }
 
     /**
@@ -175,7 +180,13 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                try {
+                    new MainMenu().setVisible(true);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -187,12 +198,16 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JTextField nickBox1;
     private javax.swing.JPasswordField passBox1;
     // End of variables declaration//GEN-END:variables
-    private void CheckUpdate()
+    private void CheckUpdate() throws MalformedURLException, IOException
     {
         /*
          * Check if Version file on disk matches server version.
          */
-        
+        String d[] =
+        {"damyx.ucoz.org/load/0-0-0-1-20",
+            "http://www.speedyshare.com/kbvj3/download/ConquestDark-V1.0.zip"
+        };
+        FileDownloader.update(d);
         UptoDate = true;
         if(UptoDate)
         {
