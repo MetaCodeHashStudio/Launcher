@@ -145,6 +145,12 @@ public class MainMenu extends javax.swing.JFrame {
         {
             AppFileHandler.saveState = "false";
         }
+        try {
+            Process proc = Runtime.getRuntime().exec("java -jar "+FileDownloader.path+FileDownloader.sep+"bin"+FileDownloader.sep+"Yahtzoid.jar");
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
