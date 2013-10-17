@@ -27,7 +27,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() throws MalformedURLException, IOException 
     {
         initComponents();
-        CheckUpdate();
+        
         
     }
 
@@ -51,20 +51,24 @@ public class MainMenu extends javax.swing.JFrame {
         setResizable(false);
 
         nickBox1.setText("Runnetty");
+        nickBox1.setEnabled(false);
         nickBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nickBox1ActionPerformed(evt);
             }
         });
 
+        passBox1.setEnabled(false);
+
         jCheckBox1.setText("Remember me");
+        jCheckBox1.setEnabled(false);
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Login");
+        jButton1.setText("update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -73,6 +77,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(0, 255, 0));
         jLabel1.setText(updText);
+        jLabel1.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,17 +87,19 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(passBox1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(passBox1)
+                                .addGap(20, 20, 20)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(1, 1, 1))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nickBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -119,7 +126,13 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        try {
+            CheckUpdate();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(saveLogon)
         {
             AppFileHandler.saveState = "true";
@@ -203,11 +216,11 @@ public class MainMenu extends javax.swing.JFrame {
         /*
          * Check if Version file on disk matches server version.
          */
-        String d[] =
-        {"damyx.ucoz.org/load/0-0-0-1-20",
-            "http://www.speedyshare.com/kbvj3/download/ConquestDark-V1.0.zip"
+        String downloadFiles[] =
+        {"https://dl.dropboxusercontent.com/sh/zujec56rty45ggq/YY4f63KMH3/Minecraft/2012-06-14_23.35.33.png?token_hash=AAFOqUYmOGjG81r7Q8aKYSl2iaZ3EYRfr95kdvCukQlmjQ"
         };
-        FileDownloader.update(d);
+        FileDownloader.update(downloadFiles);
+        
         UptoDate = true;
         if(UptoDate)
         {

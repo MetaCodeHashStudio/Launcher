@@ -39,6 +39,7 @@ INSERT INTO yahtzoid (aLvl, aGold,aXP)
 VALUE(1,1000,0);
 
 DROP table yahtzoid,metaAcc;
-
+ALTER table metaacc
+drop 
 DROP table metaAcc;
 DROP table yahtzoid;
