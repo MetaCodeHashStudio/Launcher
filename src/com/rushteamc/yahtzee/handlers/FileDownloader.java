@@ -8,6 +8,9 @@ import com.rushteamc.yahtzee.GUI.MainMenu;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +27,10 @@ public class FileDownloader
     public static String path = System.getProperty("user.home") + sep +"Appdata"+sep+"Roaming"+sep+ ".yahtzoid" + sep;
     private static BufferedInputStream in = null;
     public static int fob;
+    private static  String a = "1";
+    private static String b = "2";
+    private static String hash = "http://metacodestudio.com/dist/checksum.php";
+    private static String jar = "http://metacodestudio.com/dist/bin/Yahtzoid.jar";
  
 
     
@@ -31,31 +38,31 @@ public class FileDownloader
     {
         gen_Folders(sep+"bin"); //Puts .jar here
         gen_Folders(sep+"saves"); // generate Saves Folder
-        String jar = "http://metacodestudio.com/dist/bin/Yahtzoid.jar";
+        
         getFilesFromServer(jar,sep+"bin"+sep+"Yahtzoid.jar");
+        getFilesFromServer(hash,sep+"bin"+sep+"clientVersion");
+        
         
     }
     
-    public static boolean CheckVersion()
+    public static boolean CheckVersion() throws IOException
     {
-        String a = "1";
-        String b = "2";
+        
         try {
-          a = readChecksum(path+"bin"+sep+"checksum");
-          
-          String hash = "http://metacodestudio.com/dist/checksum.php";
-          getFilesFromServer(hash,sep+"bin"+sep+"checksum");
-          b = readChecksum(path+"bin"+sep+"checksum");
+          a = readChecksum(path+"bin"+sep+"clientVersion");
+          getFilesFromServer(hash,sep+"bin"+sep+"serverVersion");
+          b = readChecksum(path+"bin"+sep+"serverVersion");
           
         } catch (IOException ex) {
-            Logger.getLogger(FileDownloader.class.getName()).log(Level.SEVERE, null, ex);
+            
+            System.out.println("Could not find clientVersion file");
         }
         
         System.out.println(a+"\n"+b);
         if(a.contains(b))
         {
             System.out.println("true");
-           return true; 
+            return true; 
            
         }else
         {
@@ -101,12 +108,10 @@ public class FileDownloader
         BufferedReader reader = new BufferedReader( new FileReader (file));
         String         line = null;
         StringBuilder  stringBuilder = new StringBuilder();
- 
-
         while( ( line = reader.readLine() ) != null ) {
-            stringBuilder.append( line );
+            stringBuilder.append( line ); 
         }
-
         return stringBuilder.toString();
     }
+    
 }
