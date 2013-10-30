@@ -168,7 +168,7 @@ public class MainMenu extends javax.swing.JFrame {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         bar.setValue(100);
-        //System.exit(0);
+        System.exit(0);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
