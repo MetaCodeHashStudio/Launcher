@@ -22,8 +22,6 @@ public class FileDownloader
     {
         gen_Folders(sep+"bin"); //Puts .jar here
         
-        gen_Folders(sep+"saves"); // generate Saves Folder
-        
         System.out.println("| - DOWNLOADING: - Yahtzoid.jar from " + jar);
         getFilesFromServer(jar,sep+"bin"+sep+"Yahtzoid.jar");
         System.out.println("| - COMPLEETE 100%");
@@ -64,7 +62,7 @@ public class FileDownloader
         c_Folder = (new File(path+f_lockation)).mkdirs(); 
     }
     
-    public static void getFilesFromServer(String fileUrl, String saveLocation) throws IOException //Gets all names and puts in string called AllPlayers.
+    public static void getFilesFromServer(String fileUrl, String saveLocation) throws IOException 
     { 
         FileOutputStream fout = null;
         try
