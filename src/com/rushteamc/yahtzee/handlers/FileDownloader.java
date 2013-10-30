@@ -4,19 +4,11 @@
  */
 package com.rushteamc.yahtzee.handlers;
 
-import com.rushteamc.yahtzee.GUI.MainMenu;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
- * http://speedy.sh/kbvj3/ConquestDark-V1.0.zip
  * @author Runnetty
  */
 public class FileDownloader 
@@ -83,7 +75,6 @@ public class FileDownloader
     
     public static void getFilesFromServer(String fileUrl, String saveLocation) throws IOException //Gets all names and puts in string called AllPlayers.
     { 
-        
         FileOutputStream fout = null;
         try
         {
@@ -103,8 +94,6 @@ public class FileDownloader
             if (fout != null)
                 fout.close();
         }
-        
-
     }
      
     private static  String readChecksum( String file ) throws IOException {
@@ -115,6 +104,5 @@ public class FileDownloader
             stringBuilder.append( line ); 
         }
         return stringBuilder.toString();
-    }
-    
+    } 
 }
