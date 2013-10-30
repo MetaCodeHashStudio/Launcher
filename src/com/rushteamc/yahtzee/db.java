@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.Version;
 /*
  * @author Runnetty
  */
@@ -51,8 +50,7 @@ public class db {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Version.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
 
         } 
         
@@ -87,8 +85,7 @@ public class db {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Version.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            
 
         }
         
@@ -109,8 +106,7 @@ public class db {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Version.class.getName());
-                lgr.log(Level.WARNING, ex.getMessage(), ex);
+
             }
     
       }

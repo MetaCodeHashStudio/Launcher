@@ -6,6 +6,7 @@ package com.rushteamc.yahtzee.GUI;
 
 import com.rushteamc.yahtzee.handlers.AppFileHandler;
 import com.rushteamc.yahtzee.handlers.FileDownloader;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
@@ -22,13 +23,13 @@ public class MainMenu extends javax.swing.JFrame {
      * Creates new form MainMenu
      */
     private boolean saveLogon = false;
-    private boolean UptoDate = false;
     private String updText = "Checking for update...";
+    private boolean CheckVersion = FileDownloader.CheckVersion();
+    public static int barval = FileDownloader.fob;
     public MainMenu() throws MalformedURLException, IOException 
     {
         initComponents();
-        
-        
+        CheckUpdate();
     }
 
     /**
@@ -44,7 +45,7 @@ public class MainMenu extends javax.swing.JFrame {
         passBox1 = new javax.swing.JPasswordField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        bar = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,9 +76,10 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        bar.setValue(barval);
+
         jLabel1.setForeground(new java.awt.Color(0, 255, 0));
         jLabel1.setText(updText);
-        jLabel1.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +99,7 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addComponent(passBox1)
                                 .addGap(20, 20, 20)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(1, 1, 1))
                     .addGroup(layout.createSequentialGroup()
@@ -118,7 +120,7 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
                         .addComponent(jCheckBox1))
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -126,13 +128,7 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            CheckUpdate();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         if(saveLogon)
         {
             AppFileHandler.saveState = "true";
@@ -145,12 +141,21 @@ public class MainMenu extends javax.swing.JFrame {
         {
             AppFileHandler.saveState = "false";
         }
+        if(CheckVersion){
+            try {            
+                FileDownloader.update();
         try {
             Process proc = Runtime.getRuntime().exec("java -jar "+FileDownloader.path+FileDownloader.sep+"bin"+FileDownloader.sep+"Yahtzoid.jar");
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.exit(0);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -210,32 +215,26 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar bar;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField nickBox1;
     private javax.swing.JPasswordField passBox1;
     // End of variables declaration//GEN-END:variables
     private void CheckUpdate() throws MalformedURLException, IOException
-    {
-        /*
-         * Check if Version file on disk matches server version.
-         */
-        String downloadFiles[] =
-        {"https://dl.dropboxusercontent.com/sh/zujec56rty45ggq/YY4f63KMH3/Minecraft/2012-06-14_23.35.33.png?token_hash=AAFOqUYmOGjG81r7Q8aKYSl2iaZ3EYRfr95kdvCukQlmjQ"
-        };
-        FileDownloader.update(downloadFiles);
-        
-        UptoDate = true;
-        if(UptoDate)
+    {   
+        if(CheckVersion)
         {
+            jLabel1.setForeground(Color.blue);
             jLabel1.setText("Up To date");
-            
+            jButton1.setText("Start");
             
         }else
         {
+            jLabel1.setForeground(Color.green);
             jLabel1.setText("Update Available");
+            jButton1.setText("Update");
         }
     }
 }

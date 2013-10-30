@@ -4,10 +4,12 @@
  */
 package com.rushteamc.yahtzee.handlers;
 
+import com.rushteamc.yahtzee.GUI.MainMenu;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -20,36 +22,57 @@ public class FileDownloader
 
     public static String sep = System.getProperty("file.separator");
     public static String path = System.getProperty("user.home") + sep +"Appdata"+sep+"Roaming"+sep+ ".yahtzoid" + sep;
+    private static BufferedInputStream in = null;
+    public static int fob;
  
 
     
-    public static void update(String[] downloadFiles) throws MalformedURLException, IOException
+    public static void update() throws MalformedURLException, IOException
     {
         gen_Folders(sep+"bin"); //Puts .jar here
-        gen_Folders(sep+"saves"); // generate Saves Folder 
-        Download(downloadFiles);
+        gen_Folders(sep+"saves"); // generate Saves Folder
+        String jar = "http://metacodestudio.com/dist/bin/Yahtzoid.jar";
+        getFilesFromServer(jar,sep+"bin"+sep+"Yahtzoid.jar");
         
     }
     
-    
-    private static void Download(String[] downloadFiles) throws MalformedURLException, FileNotFoundException, IOException
+    public static boolean CheckVersion()
     {
-
-        String jar = "https://dl.dropboxusercontent.com/u/57469303/Yahtzoid/Yahtzoid.jar";
-       //String version = "https://dl.dropboxusercontent.com/u/57469303/Yahtzoid/Version.ver";
-       getFilesFromServer(jar,sep+"bin"+sep+"Yahtzoid.jar");
+        String a = "1";
+        String b = "2";
+        try {
+          a = readChecksum(path+"bin"+sep+"checksum");
+          
+          String hash = "http://metacodestudio.com/dist/checksum.php";
+          getFilesFromServer(hash,sep+"bin"+sep+"checksum");
+          b = readChecksum(path+"bin"+sep+"checksum");
+          
+        } catch (IOException ex) {
+            Logger.getLogger(FileDownloader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println(a+"\n"+b);
+        if(a.contains(b))
+        {
+            System.out.println("true");
+           return true; 
+           
+        }else
+        {
+            System.out.println("false");
+            return false;
+        }
         
     }
-    
-    
+       
     public static void gen_Folders(String f_lockation)
     {
         c_Folder = (new File(path+f_lockation)).mkdirs(); 
     }
     
-     public static void getFilesFromServer(String fileUrl, String saveLocation) throws IOException //Gets all names and puts in string called AllPlayers.
+    public static void getFilesFromServer(String fileUrl, String saveLocation) throws IOException //Gets all names and puts in string called AllPlayers.
     { 
-        BufferedInputStream in = null;
+        
         FileOutputStream fout = null;
         try
         {
@@ -59,6 +82,7 @@ public class FileDownloader
             int count;
             while ((count = in.read(data, 0, 1024)) != -1)
             { 
+                fob=count;
                 fout.write(data, 0, count);
             }
         }
@@ -69,9 +93,20 @@ public class FileDownloader
             if (fout != null)
                 fout.close();
         }
+        
 
     }
-    
-    
      
+    private static  String readChecksum( String file ) throws IOException {
+        BufferedReader reader = new BufferedReader( new FileReader (file));
+        String         line = null;
+        StringBuilder  stringBuilder = new StringBuilder();
+ 
+
+        while( ( line = reader.readLine() ) != null ) {
+            stringBuilder.append( line );
+        }
+
+        return stringBuilder.toString();
+    }
 }

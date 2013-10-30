@@ -17,7 +17,7 @@ public class Start {
         String sysOs = System.getProperty("os.name");
         String sysArch = System.getProperty("os.arch");
         String sysName = System.getProperty("user.name");
-        System.out.println(sysName +" is using Os: "+sysOs + "\nWith a" + sysArch + " Architecture");
+        System.out.println(sysName +" is using Os: "+sysOs + "\nWith a " + sysArch + " Architecture");
         db.startConnection();
         //db.addAccToDB();
         EventQueue.invokeLater
