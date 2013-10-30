@@ -1,16 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.rushteamc.yahtzee.handlers;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * @author Runnetty
- */
 public class FileDownloader 
 {
     private static boolean c_Folder;
@@ -23,8 +17,6 @@ public class FileDownloader
     private static String b = "2";
     private static String hash = "http://metacodestudio.com/dist/checksum.php";
     private static String jar = "http://metacodestudio.com/dist/bin/Yahtzoid.jar";
- 
-
     
     public static void update() throws MalformedURLException, IOException
     {
@@ -64,8 +56,7 @@ public class FileDownloader
         }else{
             System.out.println("| - UPDATE AVAILABLE");
             return false;
-        }
-        
+        } 
     }
        
     public static void gen_Folders(String f_lockation)

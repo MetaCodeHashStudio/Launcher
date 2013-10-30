@@ -4,7 +4,7 @@ package com.rushteamc.yahtzee;
 import java.awt.EventQueue;
 
 /*
- * @author Runnetty
+ * @author Mats Harwiss @ MetaCode Studio
  */
        
 public class Start {

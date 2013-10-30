@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.rushteamc.yahtzee.GUI;
 
 import com.rushteamc.yahtzee.handlers.AppFileHandler;
@@ -12,11 +9,6 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-/**
- *
- * @author Runnetty
- */
 public class MainMenu extends javax.swing.JFrame {
 
     /**
