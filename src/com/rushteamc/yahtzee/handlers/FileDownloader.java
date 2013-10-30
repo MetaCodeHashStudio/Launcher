@@ -36,47 +36,41 @@ public class FileDownloader
     
     public static void update() throws MalformedURLException, IOException
     {
-        
-        MainMenu.barval=0;
         gen_Folders(sep+"bin"); //Puts .jar here
-        MainMenu.barval=10;
+        
         gen_Folders(sep+"saves"); // generate Saves Folder
-        MainMenu.barval=25;
-        System.out.println("Downloading: Yahtzoid.jar from " + jar);
+        
+        System.out.println("| - DOWNLOADING: - Yahtzoid.jar from " + jar);
         getFilesFromServer(jar,sep+"bin"+sep+"Yahtzoid.jar");
-        MainMenu.barval=50;
-        System.out.println("Downloading: clientVersion from " + hash);
+        System.out.println("| - COMPLEETE 100%");
+        
+        System.out.println("| - DOWNLOADING: - clientVersion from " + hash);
         getFilesFromServer(hash,sep+"bin"+sep+"clientVersion");
-        
-        
-        
-        
+        System.out.println("| - COMPLEETE 100%");
+
     }
     
     public static boolean CheckVersion() throws IOException
     {
-        
+        System.out.println("| - LOOKING FOR UPDATE...");
         try {
           a = readChecksum(path+"bin"+sep+"clientVersion");
           getFilesFromServer(hash,sep+"bin"+sep+"serverVersion");
           b = readChecksum(path+"bin"+sep+"serverVersion");
           
         } catch (IOException ex) {
-            
-            System.out.println("Could not find clientVersion file");
+            System.out.println("----------------------------------");
+            System.out.println("| - Could not find clientVersion file!");
+            System.out.println("----------------------------------");
         }
         
-        System.out.println(a+"\n"+b);
-        if(a.contains(b))
-        {
-            System.out.println("true");
-            
-            return true; 
-           
-        }else
-        {
-            System.out.println("false");
-            
+        if(a=="1"&&b=="2") System.out.println("| - FIRST TIME SETTUP:\n| - FORCING UPDATE");
+        
+        if(a.contains(b)){
+            System.out.println("| - UP TO DATE");
+            return true;
+        }else{
+            System.out.println("| - UPDATE AVAILABLE");
             return false;
         }
         

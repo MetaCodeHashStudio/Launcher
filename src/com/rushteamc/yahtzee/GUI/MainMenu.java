@@ -135,13 +135,11 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bar.getAccessibleContext().setAccessibleName("barbox");
         bar.getAccessibleContext().setAccessibleDescription("");
-        bar.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,7 +162,7 @@ public class MainMenu extends javax.swing.JFrame {
             try {
                 bar.setValue(0);
                 FileDownloader.update();
-                bar.setValue(barval);
+                bar.setValue(50);
             } catch (MalformedURLException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -177,7 +175,7 @@ public class MainMenu extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        bar.setValue(100);
         //System.exit(0);
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -186,11 +184,11 @@ public class MainMenu extends javax.swing.JFrame {
         if(!saveLogon)
         {
             saveLogon = true;
-            System.out.println("Saving Logon");
+            System.out.println("| - SAVING LOGON");
         }else
         {
             saveLogon = false;
-            System.out.println("Not Saving Logon");
+            System.out.println("| - NOT SAVING LOGON - DELETING FOR SAFETY");
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
@@ -202,12 +200,12 @@ public class MainMenu extends javax.swing.JFrame {
         if(!updateNext)
         {
             updateNext = true;
-            System.out.println("Update enabled");
+            System.out.println("| - FORCE UPDATE: ENABLED");
             jButton1.setText("Update");
         }else
         {
             updateNext = false;
-            System.out.println("Update Disabled");
+            System.out.println("| - FORCE UPDATE: DISABLED");
             jButton1.setText("Start");
         }
     }//GEN-LAST:event_jCheckBox2ActionPerformed

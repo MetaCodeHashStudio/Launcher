@@ -17,7 +17,18 @@ public class Start {
         String sysOs = System.getProperty("os.name");
         String sysArch = System.getProperty("os.arch");
         String sysName = System.getProperty("user.name");
-        System.out.println(sysName +" is using Os: "+sysOs + "\nWith a " + sysArch + " Architecture");
+        String sysVer = System.getProperty("os.version");
+        String javaVer = System.getProperty("java.version");
+        String javaVen = System.getProperty("java.vendor");
+        String archModel = System.getProperty("sun.arch.data.model");
+        
+        System.out.println("| - SYSTEM_USER: - " + sysName +
+                "\n| - OPERATING_SYSTEM: - " + sysOs +
+                "\n| - SYSTEM_ARCHITECTURE: - " + sysArch +
+                "\n| - SYSTEM_VERSION: - " + sysVer +
+                "\n| - JAVA_VERSION: - " + javaVer +
+                "\n| - JAVA_VENDOR: - " + javaVen +
+                "\n| - ARCHITECTURE_MODEL: - " + archModel);
         db.startConnection();
         //db.addAccToDB();
         EventQueue.invokeLater
