@@ -9,9 +9,8 @@ import java.awt.EventQueue;
        
 public class Start {
 
-    public static com.rushteamc.yahtzee.GUI.LoginCreateWin frame;
-    public static com.rushteamc.yahtzee.GUI.CreateAccWin frame2;
-    public static com.rushteamc.yahtzee.GUI.MainMenu frame3;
+    public static com.rushteamc.yahtzee.GUI.MainMenu frame;
+    
     
     public static void main(String[] args)  {
         String sysOs = System.getProperty("os.name");
@@ -29,8 +28,8 @@ public class Start {
                 "\n| - JAVA_VERSION: - " + javaVer +
                 "\n| - JAVA_VENDOR: - " + javaVen +
                 "\n| - ARCHITECTURE_MODEL: - " + archModel);
-        db.startConnection();
-        //db.addAccToDB();
+        //db.startConnection();
+        
         EventQueue.invokeLater
 		(
 			new Runnable() 
@@ -39,9 +38,9 @@ public class Start {
 				{
 					try
 					{
-						frame = new com.rushteamc.yahtzee.GUI.LoginCreateWin();
-                                                frame.setLocation(600, 400);
-                                                frame.setVisible(true);
+                                            frame = new com.rushteamc.yahtzee.GUI.MainMenu();
+                                            frame.setLocation(600, 400);
+                                            frame.setVisible(true);
 					}
 					catch (Exception e)
 					{
@@ -51,58 +50,5 @@ public class Start {
 			}
 		);
         
-        }
-    
-        public static void goToCreateAcc() // Called by the event handler of PlayerNumbers. Starts PlayerNames check.
-	{
-		EventQueue.invokeLater
-		(
-			new Runnable() 
-			{
-				public void run()
-				{
-					try
-					{
-						frame2 = new com.rushteamc.yahtzee.GUI.CreateAccWin();
-                                                frame2.setLocation(600, 400);
-                                                frame2.setVisible(true);
-					}
-					catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-		);
-		
-	}
-     
-        public static void goToLogon() // Called by the event handler of PlayerNumbers. Starts PlayerNames check.
-	{
-		EventQueue.invokeLater
-		(
-			new Runnable() 
-			{
-				public void run()
-				{
-					try
-					{
-						frame3 = new com.rushteamc.yahtzee.GUI.MainMenu();
-                                                frame3.setLocation(600, 400);
-                                                frame3.setVisible(true);
-					}
-					catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-		);
-		
-	}    
-    
-    
-    
-    
-    
+        }  
 }
