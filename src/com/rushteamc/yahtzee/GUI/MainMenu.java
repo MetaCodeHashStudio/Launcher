@@ -26,7 +26,7 @@ public class MainMenu extends javax.swing.JFrame {
     private boolean updateNext = false;
     private String updText = "Checking for update...";
     private boolean CheckVersion = FileDownloader.CheckVersion();
-    public static int barval = FileDownloader.fob;
+    public static int barval = 0;
     public MainMenu() throws MalformedURLException, IOException 
     {
         initComponents();
@@ -79,6 +79,12 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         bar.setValue(barval);
+        bar.setStringPainted(true);
+        bar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                barPropertyChange(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(0, 255, 0));
         jLabel1.setText(updText);
@@ -128,15 +134,20 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jCheckBox1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        bar.getAccessibleContext().setAccessibleName("barbox");
+        bar.getAccessibleContext().setAccessibleDescription("");
+        bar.getAccessibleContext().setAccessibleParent(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         if(saveLogon)
         {
             AppFileHandler.saveState = "true";
@@ -151,19 +162,23 @@ public class MainMenu extends javax.swing.JFrame {
         }
         if(updateNext||!CheckVersion){
             try {
+                bar.setValue(0);
                 FileDownloader.update();
+                bar.setValue(barval);
             } catch (MalformedURLException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
         try {
             Process proc = Runtime.getRuntime().exec("java -jar "+FileDownloader.path+FileDownloader.sep+"bin"+FileDownloader.sep+"Yahtzoid.jar");
         } catch (IOException ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.exit(0);
+        
+        //System.exit(0);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -197,10 +212,14 @@ public class MainMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
+    private void barPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_barPropertyChange
+        
+    }//GEN-LAST:event_barPropertyChange
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -228,6 +247,7 @@ public class MainMenu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    
                     new MainMenu().setVisible(true);
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,6 +256,7 @@ public class MainMenu extends javax.swing.JFrame {
                 }
             }
         });
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar bar;

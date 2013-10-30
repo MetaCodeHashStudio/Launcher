@@ -36,11 +36,19 @@ public class FileDownloader
     
     public static void update() throws MalformedURLException, IOException
     {
-        gen_Folders(sep+"bin"); //Puts .jar here
-        gen_Folders(sep+"saves"); // generate Saves Folder
         
+        MainMenu.barval=0;
+        gen_Folders(sep+"bin"); //Puts .jar here
+        MainMenu.barval=10;
+        gen_Folders(sep+"saves"); // generate Saves Folder
+        MainMenu.barval=25;
+        System.out.println("Downloading: Yahtzoid.jar from " + jar);
         getFilesFromServer(jar,sep+"bin"+sep+"Yahtzoid.jar");
+        MainMenu.barval=50;
+        System.out.println("Downloading: clientVersion from " + hash);
         getFilesFromServer(hash,sep+"bin"+sep+"clientVersion");
+        
+        
         
         
     }
@@ -62,11 +70,13 @@ public class FileDownloader
         if(a.contains(b))
         {
             System.out.println("true");
+            
             return true; 
            
         }else
         {
             System.out.println("false");
+            
             return false;
         }
         
@@ -89,7 +99,6 @@ public class FileDownloader
             int count;
             while ((count = in.read(data, 0, 1024)) != -1)
             { 
-                fob=count;
                 fout.write(data, 0, count);
             }
         }
@@ -106,7 +115,7 @@ public class FileDownloader
      
     private static  String readChecksum( String file ) throws IOException {
         BufferedReader reader = new BufferedReader( new FileReader (file));
-        String         line = null;
+        String line;
         StringBuilder  stringBuilder = new StringBuilder();
         while( ( line = reader.readLine() ) != null ) {
             stringBuilder.append( line ); 
