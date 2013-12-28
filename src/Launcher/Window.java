@@ -1,3 +1,10 @@
+
+
+/**
+ * @author Runnetty aka Mats Harwiss
+ * @ MetaCode Studio www.metacodestudio.com
+ */
+
 package Launcher;
 
 import java.awt.Color;
@@ -39,7 +46,7 @@ public class Window extends javax.swing.JFrame {
         textField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Launcher");
+        setTitle(Start.version);
         setResizable(false);
 
         nickBox1.setText("Runnetty");

@@ -1,3 +1,9 @@
+
+
+/**
+ * @author Runnetty aka Mats Harwiss
+ * @ MetaCode Studio www.metacodestudio.com
+ */
 package Launcher;
 
 import java.io.File;

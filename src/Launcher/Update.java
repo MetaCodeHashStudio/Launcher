@@ -1,3 +1,10 @@
+
+
+/**
+ * @author Runnetty aka Mats Harwiss
+ * @ MetaCode Studio www.metacodestudio.com
+ */
+
 package Launcher;
 
 import static Launcher.Files.getFilesFromServer;
