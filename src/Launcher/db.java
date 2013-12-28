@@ -1,5 +1,5 @@
 
-package com.rushteamc.yahtzee;
+package Launcher;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
